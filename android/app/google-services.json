@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "626836008655",
+    "project_id": "i-am-talking",
+    "storage_bucket": "i-am-talking.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:626836008655:android:99a22ab01d884fa96e11ba",
+        "android_client_info": {
+          "package_name": "com.example.iamtalking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "626836008655-an3orusibefjp48c1iu3jbhp58kh056f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.iamtalking",
+            "certificate_hash": "907e7ce05895927aefc59985768bdd32e9030a80"
+          }
+        },
+        {
+          "client_id": "626836008655-70iaiicek8pvhg82e82c9fmbbi0hs9f8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpwM2czstd28-VNAlN9xoLYbFnVYH2GY0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "626836008655-70iaiicek8pvhg82e82c9fmbbi0hs9f8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "626836008655-7pgpeqh1ddhr0pm33ig13p0dh5h9e4rk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.iamtalking"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

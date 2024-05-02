@@ -1,0 +1,14 @@
+const String loginViewRoute = 'login/';
+const String registerViewRoute = '/register';
+const String homeViewRoute = '/';
+const String postViewRoute = '/post';
+const String commentViewRoute = '/comment';
+const String followersViewRoute = '/followers';
+const String followingViewRoute = '/following';
+const String loginWithGoogleViewRoute = '/loginWithGoogle';
+const String editPostViewRoute = '/edit_post';
+const String userProfileViewRoute = '/user_profile';
+const String editProfileViewRoute = '/edit_profile';
+const String userPostsViewRoute = '/user_posts';
+const String chatViewRoute = '/chat';
+//const String chatListViewRoute = '/chat_list';
