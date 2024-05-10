@@ -1,7 +1,7 @@
 import 'package:iamtalking/core/services/services_locator.dart';
 import 'package:iamtalking/feautures/data/models/chat_model.dart';
 
-import '../services/chat_dervices.dart';
+import '../services/chat_services.dart';
 
 class ChatRepo {
   final ChatServices chatServices = sl<ChatServices>();

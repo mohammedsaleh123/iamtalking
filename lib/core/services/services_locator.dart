@@ -17,7 +17,7 @@ import 'package:iamtalking/feautures/data/services/user_services.dart';
 import '../../feautures/bussines_logic/chat_cubit/chat_cubit.dart';
 import '../../feautures/data/repository/chat_repo.dart';
 import '../../feautures/data/repository/comment_repo.dart';
-import '../../feautures/data/services/chat_dervices.dart';
+import '../../feautures/data/services/chat_services.dart';
 
 late GetIt sl;
 

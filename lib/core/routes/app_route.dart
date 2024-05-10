@@ -10,6 +10,8 @@ import 'package:iamtalking/feautures/presentation/user_profile_view/user_profile
 import '../../feautures/data/models/user_auth_model.dart';
 import '../../feautures/presentation/chat_view/chat_view.dart';
 import '../../feautures/presentation/comment_view/comment_view.dart';
+import '../../feautures/presentation/followers/followers.dart';
+import '../../feautures/presentation/following/following.dart';
 import '../../feautures/presentation/user_posts_view/user_posts_view.dart';
 
 class AppRoute {
@@ -72,6 +74,22 @@ class AppRoute {
           },
           transitionsBuilder: (_, a, __, c) =>
               FadeTransition(opacity: a, child: c),
+        );
+      case followingViewRoute:
+        final List<dynamic> args = settings.arguments as List<dynamic>;
+        final user = args[0] as UserAuthModel;
+        return PageRouteBuilder(
+          pageBuilder: (_, a, __) {
+            return Following(user: user);
+          },
+        );
+      case followersViewRoute:
+        final List<dynamic> args = settings.arguments as List<dynamic>;
+        final user = args[0] as UserAuthModel;
+        return PageRouteBuilder(
+          pageBuilder: (_, a, __) {
+            return Followers(user: user);
+          },
         );
     }
     return null;

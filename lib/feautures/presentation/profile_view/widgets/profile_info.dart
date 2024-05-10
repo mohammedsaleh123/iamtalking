@@ -5,6 +5,8 @@ import 'package:iamtalking/core/extensions/padding_extension.dart';
 import 'package:iamtalking/core/utils/app_colors.dart';
 import 'package:iamtalking/generated/l10n.dart';
 
+import '../../../../core/routes/route_strings.dart';
+
 class ProfileInfo extends StatelessWidget {
   const ProfileInfo({
     super.key,
@@ -33,9 +35,17 @@ class ProfileInfo extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  Text(
-                    S.of(context).followers,
-                    style: Theme.of(context).textTheme.bodyMedium,
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                        followersViewRoute,
+                        arguments: [snapshot.data],
+                      );
+                    },
+                    child: Text(
+                      S.of(context).followers,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                   ),
                   Divider(
                     color: AppColors.white,
@@ -51,9 +61,17 @@ class ProfileInfo extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Text(
-                    S.of(context).following,
-                    style: Theme.of(context).textTheme.bodyMedium,
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                        followingViewRoute,
+                        arguments: [snapshot.data],
+                      );
+                    },
+                    child: Text(
+                      S.of(context).following,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                   ),
                   Divider(
                     color: AppColors.white,
