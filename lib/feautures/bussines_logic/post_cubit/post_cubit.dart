@@ -136,7 +136,7 @@ class PostBloc extends Cubit<PostState> {
   }
 
   Stream<List<PostModel>> getAllPosts() {
-      return postRepo.getAllPosts();
+    return postRepo.getAllPosts();
   }
 
   File? uploadPostImage(String type, String source) {
@@ -166,8 +166,11 @@ class PostBloc extends Cubit<PostState> {
   void clearPostField() {
     captionController.clear();
     postImage = null;
-    isVideo = false;
-    videoController!.dispose();
+    postImageToEdit = '';
+    editCaptionController.clear();
+    videoController = null;
+    isPlay = false;
+    emit(ClearPostField());
   }
 
   void changePlayState() {

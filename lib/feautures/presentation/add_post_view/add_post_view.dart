@@ -20,62 +20,68 @@ class AddPostView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ToastContext().init(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(S.of(context).add_post),
-        actions: [
-          IconButton(
-            onPressed: () {
-              BlocProvider.of<PostBloc>(context).clearPostField();
+    return BlocBuilder<PostBloc, PostState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(S.of(context).add_post),
+            actions: [
+               IconButton(
+                    onPressed: () {
+                      BlocProvider.of<PostBloc>(context).clearPostField();
+                    },
+                    icon: const Icon(Icons.close),
+                  ),
+            ],
+          ),
+          body: BlocConsumer<PostBloc, PostState>(
+            listener: (context, state) {
+              if (state is AddPostSuccess) {
+                Toast.show(
+                  S.of(context).add_post_successfully,
+                  duration: Toast.lengthShort,
+                  gravity: Toast.bottom,
+                  backgroundColor: AppColors.blue,
+                );
+              }
             },
-            icon: const Icon(Icons.close),
-          )
-        ],
-      ),
-      body: BlocConsumer<PostBloc, PostState>(
-        listener: (context, state) {
-          if (state is AddPostSuccess) {
-            Toast.show(
-              S.of(context).add_post_successfully,
-              duration: Toast.lengthShort,
-              gravity: Toast.bottom,
-              backgroundColor: AppColors.blue,
-            );
-          }
-        },
-        builder: (context, state) {
-          final cubit = BlocProvider.of<PostBloc>(context);
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                PostMedia(cubit: cubit),
-                ChoosePostMedia(cubit: cubit),
-                CustomTextField(
-                  hintText: S.of(context).add_caption,
-                  textController: cubit.captionController,
-                ).padding(0, 20.h),
-                StreamBuilder<UserAuthModel>(
-                    stream: BlocProvider.of<UserBloc>(context).getCurrentUser(),
-                    builder: (context, user) {
-                      return CustomButton(
-                        onPressed: () {
-                          cubit.addPost(user.data!);
-                        },
-                        color: AppColors.blue,
-                        radius: 20.sp,
-                        minWidth: double.infinity,
-                        child: state is AddPostLoading
-                            ? const CircularProgressIndicator().padding(0, 15.h)
-                            : Text(
-                                S.of(context).add_post,
-                              ).padding(0, 15.h),
-                      );
-                    }),
-              ],
-            ),
-          );
-        },
-      ),
+            builder: (context, state) {
+              final cubit = BlocProvider.of<PostBloc>(context);
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const PostMedia(),
+                    ChoosePostMedia(cubit: cubit),
+                    CustomTextField(
+                      hintText: S.of(context).add_caption,
+                      textController: cubit.captionController,
+                    ).padding(0, 20.h),
+                    StreamBuilder<UserAuthModel>(
+                        stream:
+                            BlocProvider.of<UserBloc>(context).getCurrentUser(),
+                        builder: (context, user) {
+                          return CustomButton(
+                            onPressed: () {
+                              cubit.addPost(user.data!);
+                            },
+                            color: AppColors.blue,
+                            radius: 20.sp,
+                            minWidth: double.infinity,
+                            child: state is AddPostLoading
+                                ? const CircularProgressIndicator()
+                                    .padding(0, 15.h)
+                                : Text(
+                                    S.of(context).add_post,
+                                  ).padding(0, 15.h),
+                          );
+                        }),
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

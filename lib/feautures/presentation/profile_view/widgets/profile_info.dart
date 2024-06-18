@@ -17,7 +17,7 @@ class ProfileInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 80.h,
+      height: 90.h,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

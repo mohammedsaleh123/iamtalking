@@ -35,8 +35,9 @@ class MyApp extends StatelessWidget {
       ],
       child: BlocBuilder<AppBloc, AppState>(
         builder: (context, state) {
+          final size = MediaQuery.of(context).size;
           return ScreenUtilInit(
-            designSize: const Size(360, 690),
+            designSize:  Size(size.width, size.height),
             minTextAdapt: true,
             splitScreenMode: true,
             builder: (screen, child) {

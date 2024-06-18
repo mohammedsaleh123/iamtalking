@@ -52,7 +52,7 @@ class _EditPostViewState extends State<EditPostView> {
           return SingleChildScrollView(
             child: Column(
               children: [
-                PostMedia(cubit: cubit),
+                const PostMedia(),
                 ChoosePostMedia(cubit: cubit),
                 CustomTextField(
                   hintText: S.of(context).add_caption,

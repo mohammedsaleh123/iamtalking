@@ -114,3 +114,5 @@ final class UnSavePostFailed extends PostState {
 
   UnSavePostFailed(this.error);
 }
+
+final class ClearPostField extends PostState {}
