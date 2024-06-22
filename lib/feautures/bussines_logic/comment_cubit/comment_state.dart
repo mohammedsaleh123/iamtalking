@@ -64,3 +64,13 @@ final class GetCommentsFailed extends CommentState {
 
   GetCommentsFailed(this.error);
 }
+
+final class UploadCommentImageLoading extends CommentState {}
+
+final class UploadCommentImageSuccess extends CommentState {}
+
+final class UploadCommentImageFailed extends CommentState {
+  final String error;
+
+  UploadCommentImageFailed(this.error);
+}

@@ -20,7 +20,7 @@ ThemeData darkTheme(BuildContext context) {
     ),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all(AppColors.white),
+        foregroundColor: WidgetStateProperty.all(AppColors.white),
       ),
     ),
     textTheme: TextTheme(
@@ -49,7 +49,7 @@ ThemeData lightTheme(BuildContext context) {
     ),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all(AppColors.black),
+        foregroundColor: WidgetStateProperty.all(AppColors.black),
       ),
     ),
     textTheme: TextTheme(

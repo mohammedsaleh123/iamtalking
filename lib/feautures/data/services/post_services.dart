@@ -10,7 +10,9 @@ class PostServices {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   Query<Map<String, dynamic>> getPosts() {
-    return firestore.collection(AppStrings.postsCollection).orderBy('createdAt', descending: true);
+    return firestore
+        .collection(AppStrings.postsCollection)
+        .orderBy('createdAt', descending: true);
   }
 
   Future<bool> deletePost(String postId) async {

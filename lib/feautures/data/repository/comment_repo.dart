@@ -6,8 +6,8 @@ import '../../../core/services/services_locator.dart';
 class CommentRepo {
   final commentServices = sl<CommentServices>();
 
-  Future<void> addComment(String postId, Map<String, dynamic> data) async {
-    await commentServices.addComment(postId, data);
+  Future<void> addComment(String postId,String commentId, Map<String, dynamic> data) async {
+    await commentServices.addComment(postId,commentId, data);
   }
 
   Future<void> deleteComment(String postId, String commentId) async {

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iamtalking/core/helper/picke_file_helper.dart';
 import 'package:iamtalking/feautures/data/models/comment_model.dart';
 import 'package:iamtalking/feautures/data/models/user_auth_model.dart';
 import 'package:iamtalking/feautures/data/repository/comment_repo.dart';
@@ -19,6 +20,7 @@ class CommentBloc extends Cubit<CommentState> {
 
   CommentRepo commentRepo = sl<CommentRepo>();
   UploadToStorageHelper uploadToStorageHelper = sl<UploadToStorageHelper>();
+  final pickeFileServices = sl<PickeFileHelper>();
   TextEditingController commentController = TextEditingController();
   File? commentImage;
 
@@ -44,7 +46,7 @@ class CommentBloc extends Cubit<CommentState> {
       commentImage: image ?? '',
     ).toMap();
     try {
-      await commentRepo.addComment(postId, data);
+      await commentRepo.addComment(postId,uuid, data);
       emit(AddCommentSuccess());
       commentController.clear();
       commentImage = null;
@@ -101,5 +103,23 @@ class CommentBloc extends Cubit<CommentState> {
     } catch (e) {
       rethrow;
     }
+  }
+
+  File? uploadCommentImage(String type, String source) {
+    File? file;
+    emit(UploadCommentImageLoading());
+    try {
+      pickeFileServices.pickFile(type, source).then((value) {
+        commentImage = File(value!.path);
+        file = commentImage;
+        if (type == AppStrings.video) {
+        }
+        emit(UploadCommentImageSuccess());
+      });
+      return file;
+    } catch (e) {
+      emit(UploadCommentImageFailed(e.toString()));
+    }
+    return null;
   }
 }

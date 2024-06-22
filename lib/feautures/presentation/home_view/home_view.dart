@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iamtalking/feautures/presentation/add_post_view/add_post_view.dart';
 import 'package:iamtalking/feautures/presentation/feeds_view/feeds_view.dart';
-import 'package:iamtalking/feautures/presentation/people_view/people_view.dart';
 import 'package:iamtalking/feautures/presentation/saved_posts_view/saved_posts_view.dart';
 import 'package:iamtalking/generated/l10n.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
@@ -45,13 +44,6 @@ class _HomeViewState extends State<HomeView> {
           item: ItemConfig(
             icon: const Icon(Icons.save),
             title: S.of(context).saved_posts,
-          ),
-        ),
-        PersistentTabConfig(
-          screen: const PeopleView(),
-          item: ItemConfig(
-            icon: const Icon(Icons.people),
-            title: S.of(context).people,
           ),
         ),
       ];

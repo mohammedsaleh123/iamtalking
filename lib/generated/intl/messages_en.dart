@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "already_have_an_account":
             MessageLookupByLibrary.simpleMessage("Already have an account?"),
         "camera": MessageLookupByLibrary.simpleMessage("Camera"),
+        "cancel": MessageLookupByLibrary.simpleMessage("cancel"),
         "change_language":
             MessageLookupByLibrary.simpleMessage("Change Language"),
         "choose_image": MessageLookupByLibrary.simpleMessage("Choose Image"),

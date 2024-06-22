@@ -32,7 +32,7 @@ class CommentServices {
           .collection(AppStrings.postsCollection)
           .doc(postId)
           .collection(AppStrings.commentsCollection)
-          .doc(commentId)
+          .doc(postId)
           .update(
         {
           AppStrings.likesCollection:
@@ -45,13 +45,15 @@ class CommentServices {
     }
   }
 
-  Future<bool> addComment(String postId, Map<String, dynamic> data) async {
+  Future<bool> addComment(
+      String postId, String commentId, Map<String, dynamic> data) async {
     try {
       await firestore
           .collection(AppStrings.postsCollection)
           .doc(postId)
           .collection(AppStrings.commentsCollection)
-          .add(data);
+          .doc(commentId)
+          .set(data);
       return true;
     } catch (e) {
       return false;
@@ -79,7 +81,7 @@ class CommentServices {
           .collection(AppStrings.postsCollection)
           .doc(postId)
           .collection(AppStrings.commentsCollection)
-          .doc(commentId)
+          .doc(postId)
           .update(data);
       return true;
     } catch (e) {

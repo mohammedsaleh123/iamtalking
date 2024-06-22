@@ -25,9 +25,11 @@ class PostItem extends StatelessWidget {
       padding: EdgeInsets.all(10.sp),
       height: MediaQuery.of(context).size.height * 0.55,
       child: Column(
+        mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          PostHeader(post: posts,
+          PostHeader(
+            post: posts,
             user: user,
           ),
           PostMedia(posts: posts),

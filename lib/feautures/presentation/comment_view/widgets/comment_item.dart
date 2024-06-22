@@ -1,12 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable_text/expandable_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iamtalking/core/extensions/center_extension.dart';
 import 'package:iamtalking/core/extensions/padding_extension.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/custom_shimmer.dart';
 import '../../../../generated/l10n.dart';
+import '../../../bussines_logic/comment_cubit/comment_cubit.dart';
 import '../../../data/models/comment_model.dart';
 
 // ignore: must_be_immutable
@@ -14,34 +18,48 @@ class CommentItem extends StatelessWidget {
   CommentItem({
     super.key,
     required this.comments,
+    required this.postId,
   });
   CommentModel comments;
+  String postId;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onLongPress: () {
-        showModalBottomSheet(
-          context: context,
-          builder: (context) {
-            return Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    S.of(context).delete_comment,
-                  ),
-                  SizedBox(height: 10.h),
-                  Text(
-                    S.of(context).edit_comment,
-                  )
-                ],
-              ),
-            );
-          },
-        );
+        if (comments.userId == FirebaseAuth.instance.currentUser!.uid) {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return BlocBuilder<CommentBloc, CommentState>(
+                builder: (context, state) {
+                  return AlertDialog(
+                    alignment: Alignment.center,
+                    title: Text(
+                      S.of(context).delete_comment,
+                    ).center(),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(S.of(context).cancel),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          BlocProvider.of<CommentBloc>(context)
+                              .deleteComment(postId, comments.commentId);
+                          Navigator.pop(context);
+                        },
+                        child: Text(S.of(context).delete),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          );
+        }
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,11 +69,11 @@ class CommentItem extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16.r),
               child: CachedNetworkImage(
-                height: 50.h,
-                width: 50.w,
+                height: 100.h,
+                width: 100.w,
                 placeholder: (context, url) => CustomShimmer(
-                  height: 50.h,
-                  width: 50.w,
+                  height: 100.h,
+                  width: 100.w,
                 ),
                 imageUrl: comments.userImage,
                 fit: BoxFit.cover,
@@ -65,6 +83,7 @@ class CommentItem extends StatelessWidget {
           SizedBox(width: 10.w),
           Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   width: double.infinity,
@@ -103,6 +122,16 @@ class CommentItem extends StatelessWidget {
                     ],
                   ),
                 ),
+                if (comments.commentImage != '')
+                  CachedNetworkImage(
+                    height: 200.h,
+                    width: 200.w,
+                    imageUrl: comments.commentImage!,
+                    placeholder: (context, url) => CustomShimmer(
+                      height: 50.h,
+                      width: 50.w,
+                    ),
+                  ),
                 Row(
                   children: [
                     IconButton(
