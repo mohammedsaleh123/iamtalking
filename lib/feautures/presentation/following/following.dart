@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iamtalking/feautures/data/models/user_auth_model.dart';
 
+import '../../../core/routes/route_strings.dart';
 import '../../../core/widgets/custom_shimmer.dart';
 import '../../../generated/l10n.dart';
 import '../../bussines_logic/user_cubit/user_cubit.dart';
@@ -51,6 +52,12 @@ class Following extends StatelessWidget {
                     ),
                   ),
                 ),
+                onTap: () {
+                  Navigator.of(context).pushNamed(
+                    userProfileViewRoute,
+                    arguments: snapshot.data!.uid,
+                  );
+                },
               );
             },
           );

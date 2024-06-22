@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iamtalking/core/routes/route_strings.dart';
 import 'package:iamtalking/core/widgets/custom_shimmer.dart';
 import 'package:iamtalking/feautures/data/models/user_auth_model.dart';
 
@@ -51,6 +52,12 @@ class Followers extends StatelessWidget {
                     ),
                   ),
                 ),
+                onTap: () {
+                  Navigator.of(context).pushNamed(
+                    userProfileViewRoute,
+                    arguments: snapshot.data!.uid,
+                  );
+                },
               );
             },
           );
