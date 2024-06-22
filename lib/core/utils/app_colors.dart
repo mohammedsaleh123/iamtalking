@@ -6,6 +6,7 @@ abstract class AppColors {
   static const Color red = Colors.red;
   static const Color green = Colors.green;
   static const Color blue = Colors.blue;
+  static Color deebBlue = Colors.blue.shade600;
   static const Color yellow = Colors.yellow;
   static const Color grey = Colors.grey;
   static Color deepGrey = Colors.grey.shade900;

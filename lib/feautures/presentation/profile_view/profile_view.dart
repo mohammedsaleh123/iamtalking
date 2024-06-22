@@ -10,6 +10,8 @@ import 'package:iamtalking/feautures/presentation/profile_view/widgets/profile_i
 import 'package:iamtalking/feautures/presentation/profile_view/widgets/profile_posts.dart';
 import 'package:iamtalking/generated/l10n.dart';
 
+import '../drawer_view/custom_drawer.dart';
+
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
@@ -18,7 +20,6 @@ class ProfileView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).profile),
-        centerTitle: true,
       ),
       body: StreamBuilder<UserAuthModel>(
         stream: UserBloc.get(context).getCurrentUser(),
@@ -47,6 +48,7 @@ class ProfileView extends StatelessWidget {
           );
         },
       ),
+      drawer: const CustomDrawer(),
     );
   }
 }

@@ -91,7 +91,9 @@ class CommentView extends StatelessWidget {
                               );
                               FocusScope.of(context).unfocus();
                             },
-                            icon: const Icon(Icons.send),
+                            icon: commentCubit.state is AddCommentLoading
+                                ? const CircularProgressIndicator()
+                                : const Icon(Icons.send),
                           );
                         },
                       )

@@ -13,6 +13,7 @@ import 'package:iamtalking/generated/l10n.dart';
 import 'package:toast/toast.dart';
 
 import '../../bussines_logic/user_cubit/user_cubit.dart';
+import '../drawer_view/custom_drawer.dart';
 
 class AddPostView extends StatelessWidget {
   const AddPostView({super.key});
@@ -26,12 +27,12 @@ class AddPostView extends StatelessWidget {
           appBar: AppBar(
             title: Text(S.of(context).add_post),
             actions: [
-               IconButton(
-                    onPressed: () {
-                      BlocProvider.of<PostBloc>(context).clearPostField();
-                    },
-                    icon: const Icon(Icons.close),
-                  ),
+              IconButton(
+                onPressed: () {
+                  BlocProvider.of<PostBloc>(context).clearPostField();
+                },
+                icon: const Icon(Icons.close),
+              ),
             ],
           ),
           body: BlocConsumer<PostBloc, PostState>(
@@ -57,29 +58,35 @@ class AddPostView extends StatelessWidget {
                       textController: cubit.captionController,
                     ).padding(0, 20.h),
                     StreamBuilder<UserAuthModel>(
-                        stream:
-                            BlocProvider.of<UserBloc>(context).getCurrentUser(),
-                        builder: (context, user) {
-                          return CustomButton(
-                            onPressed: () {
-                              cubit.addPost(user.data!);
-                            },
-                            color: AppColors.blue,
-                            radius: 20.sp,
-                            minWidth: double.infinity,
-                            child: state is AddPostLoading
-                                ? const CircularProgressIndicator()
-                                    .padding(0, 15.h)
-                                : Text(
-                                    S.of(context).add_post,
-                                  ).padding(0, 15.h),
-                          );
-                        }),
+                      stream:
+                          BlocProvider.of<UserBloc>(context).getCurrentUser(),
+                      builder: (context, user) {
+                        return Column(
+                          children: [
+                            CustomButton(
+                              onPressed: () {
+                                cubit.addPost(user.data!);
+                              },
+                              color: AppColors.blue,
+                              radius: 20.sp,
+                              minWidth: double.infinity,
+                              child: state is AddPostLoading
+                                  ? const CircularProgressIndicator()
+                                      .padding(0, 15.h)
+                                  : Text(
+                                      S.of(context).add_post,
+                                    ).padding(0, 15.h),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
                   ],
                 ),
               );
             },
           ),
+          drawer: const CustomDrawer(),
         );
       },
     );

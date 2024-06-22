@@ -30,6 +30,8 @@ ThemeData darkTheme(BuildContext context) {
     snackBarTheme: const SnackBarThemeData(
       backgroundColor: AppColors.black,
     ),
+    cardColor: AppColors.grey,
+    primaryColorLight: AppColors.deebBlue,
   );
 }
 
@@ -59,6 +61,8 @@ ThemeData lightTheme(BuildContext context) {
     snackBarTheme: const SnackBarThemeData(
       backgroundColor: AppColors.white,
     ),
+    cardColor: AppColors.deepGrey,
+    primaryColorLight: AppColors.white,
   );
 }
 

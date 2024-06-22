@@ -35,8 +35,7 @@ class ChatFields extends StatelessWidget {
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          content: ChooseChatMedia(
-                              chatCubit: chatCubit),
+                          content: ChooseChatMedia(chatCubit: chatCubit),
                         );
                       },
                     );
@@ -58,7 +57,9 @@ class ChatFields extends StatelessWidget {
             chatCubit.sendMessage(otherUser.uid);
             FocusScope.of(context).unfocus();
           },
-          icon: const Icon(Icons.send),
+          icon: chatCubit.state is SendMessageLoading
+              ? const CircularProgressIndicator()
+              : const Icon(Icons.send),
         ),
       ],
     );

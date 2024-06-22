@@ -17,54 +17,62 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   int currentPageIndex = 0;
-  List<PersistentTabConfig> _tabs() => [
-        PersistentTabConfig(
-          screen: const FeedsView(),
-          item: ItemConfig(
-            icon: const Icon(Icons.home),
-            title: S.of(context).feeds,
-          ),
-        ),
-        PersistentTabConfig(
-          screen: const ProfileView(),
-          item: ItemConfig(
-            icon: const Icon(Icons.person),
-            title: S.of(context).profile,
-          ),
-        ),
-        PersistentTabConfig(
-          screen: const AddPostView(),
-          item: ItemConfig(
-            icon: const Icon(Icons.add),
-            title: S.of(context).add_post,
-          ),
-        ),
-        PersistentTabConfig(
-          screen: SavedPostsView(),
-          item: ItemConfig(
-            icon: const Icon(Icons.save),
-            title: S.of(context).saved_posts,
-          ),
-        ),
-      ];
+  List<Widget> pages = [
+    const FeedsView(),
+    const ProfileView(),
+    const AddPostView(),
+    SavedPostsView(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PersistentTabView(
-        screenTransitionAnimation: const ScreenTransitionAnimation(
-            duration: Durations.short4, curve: Curves.linear),
-        tabs: _tabs(),
-        navBarBuilder: (NavBarConfig navBarConfig) {
-          return Style8BottomNavBar(
-            navBarConfig: navBarConfig,
-            navBarDecoration: NavBarDecoration(
-              color: Theme.of(context).scaffoldBackgroundColor,
-              borderRadius: BorderRadius.circular(24.sp),
+      body: pages[currentPageIndex],
+      floatingActionButton: Container(
+        height: 70.h,
+        width: double.infinity,
+        alignment: Alignment.bottomCenter,
+        margin: EdgeInsets.all(10.sp),
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: BottomNavigationBar(
+          backgroundColor: Colors.transparent,
+          type: BottomNavigationBarType.fixed,
+          elevation: 0,
+          currentIndex: currentPageIndex,
+          selectedItemColor: Theme.of(context).primaryColorLight,
+          unselectedItemColor: Theme.of(context).primaryColor.withOpacity(0.6),
+          iconSize: 30.sp,
+          items: [
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.home),
+              label: S.of(context).feeds,
             ),
-          );
-        },
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.analytics),
+              label: S.of(context).profile,
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.analytics),
+              label: S.of(context).add_post,
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.analytics),
+              label: S.of(context).saved_posts,
+            ),
+          ],
+          onTap: (index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
+        ),
       ),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
     );
   }
 }

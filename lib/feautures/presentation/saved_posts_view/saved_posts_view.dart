@@ -8,6 +8,7 @@ import 'package:iamtalking/generated/l10n.dart';
 
 import '../../bussines_logic/user_cubit/user_cubit.dart';
 import '../../data/models/user_auth_model.dart';
+import '../drawer_view/custom_drawer.dart';
 
 // ignore: must_be_immutable
 class SavedPostsView extends StatelessWidget {
@@ -35,33 +36,35 @@ class SavedPostsView extends StatelessWidget {
               .where((post) => post.savedPost.contains(user.currentUser!.uid))
               .toList();
           return StreamBuilder<UserAuthModel>(
-              stream: BlocProvider.of<UserBloc>(context)
-                  .getUser(posts.data!.map((e) => e.userId).first),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                if (snapshot.hasError) {
-                  return const SizedBox();
-                }
-                return Column(
-                  children: [
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: savedPosts.length,
-                        itemBuilder: (context, index) {
-                          return PostItem(
-                              posts: savedPosts[index], user: snapshot.data!);
-                        },
-                      ),
-                    ),
-                  ],
+            stream: BlocProvider.of<UserBloc>(context)
+                .getUser(posts.data!.map((e) => e.userId).first),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
                 );
-              });
+              }
+              if (snapshot.hasError) {
+                return const SizedBox();
+              }
+              return Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: savedPosts.length,
+                      itemBuilder: (context, index) {
+                        return PostItem(
+                            posts: savedPosts[index], user: snapshot.data!);
+                      },
+                    ),
+                  ),
+                ],
+              );
+            },
+          );
         },
       ),
+      drawer: const CustomDrawer(),
     );
   }
 }
